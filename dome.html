@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div >
+			全选<input type="checkbox" name="" id="selectAll" value="" />
+		  <ul id="box">
+		  	<li><input type="checkbox" name="" id="" value="" /><span>dfer</span></li>
+		  	<li><input type="checkbox" name="" id="" value="" /><span>dfer</span></li>
+		  	<li><input type="checkbox" name="" id="" value="" /><span>dfer</span></li>
+		  	<li><input type="checkbox" name="" id="" value="" /><span>dfer</span></li>
+		  	<li><input type="checkbox" name="" id="" value="" /><span>dfer</span></li>
+		  </ul>
+		</div>
+		<script>
+			
+			function init(){
+				this.box=document.getElementById("box");
+				this.inputs=this.box.querySelectorAll("input");
+				this.lis=this.box.querySelectorAll("li");
+				this.selectAll=document.getElementById("selectAll");
+				this.clicknum=0;
+			}
+			init.prototype.eventFn=function(events){
+				var This=this;
+				
+				for(var i=0;i<this.inputs.length;i++){
+					this.inputs[i].index=i;
+					this.inputs[i][events]=function(){
+						This.selectone(this);
+
+						
+					}
+				}
+				
+			    this.selectAll[events]=function(){
+			    	This.selectalls(this);
+				
+				}
+				
+				
+			}
+			init.prototype.selectone=function(that){
+						if(that.checked==true){
+							this.clicknum++;
+						}else{
+							this.clicknum--;
+						}
+						if(this.clicknum==this.lis.length){
+							this.selectAll.checked=true;
+						}else{
+							this.selectAll.checked=false;
+						}
+				
+			}
+			init.prototype.selectalls=function(that){
+				
+					for(var i=0;i<this.inputs.length;i++){
+						this.inputs[i].checked=that.checked;
+						if(that.checked==true){
+							this.clicknum=this.lis.length;
+						}else{
+							this.clicknum=0;
+						}
+					}
+				
+			}
+			
+			var t1=new init();
+			t1.eventFn("onclick");
+
+		</script>
+	</body>
+</html>
